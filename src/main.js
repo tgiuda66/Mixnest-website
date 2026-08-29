@@ -424,6 +424,22 @@ window.addEventListener('scroll', () => {
 }, { passive: true })
 
 const getSequenceIndex = (video) => Number(video.dataset.sequenceIndex ?? 0)
+const primeVideoFrame = (video) => {
+  video.preload = 'auto'
+
+  if (video.readyState === 0) {
+    video.load()
+  }
+
+  try {
+    video.currentTime = 0
+  } catch {
+    video.addEventListener('loadedmetadata', () => {
+      video.currentTime = 0
+    }, { once: true })
+  }
+}
+
 const scrollToWorkflowStep = (step) => {
   workflowSteps[Number(step)]?.scrollIntoView({ behavior: 'smooth', block: 'center' })
 }
@@ -436,7 +452,7 @@ const advanceWorkflowStep = () => {
   }
 }
 
-const pauseWorkflowVideos = () => {
+function pauseWorkflowVideos() {
   workflowVideos.forEach((video) => {
     video.pause()
     video.classList.remove('playing')
@@ -493,8 +509,9 @@ const setWorkflowStep = (step, options = {}) => {
       video.play().catch(() => {})
     } else {
       video.pause()
-      if (isActive && videoStep > currentStep) {
-        video.currentTime = 0
+
+      if (isActive && videoStep >= currentStep) {
+        primeVideoFrame(video)
       }
     }
   })
@@ -576,5 +593,12 @@ if (workflowSteps.length) {
   })
 
   workflowSteps.forEach((step) => workflowObserver.observe(step))
-  setWorkflowStep(0)
+  workflowVideos.forEach((video) => {
+    video.pause()
+    video.classList.remove('active', 'playing')
+    video.preload = 'auto'
+    video.load()
+  })
+
+  setWorkflowStep(0, { force: true })
 }

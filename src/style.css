@@ -342,7 +342,7 @@ img {
 .hero-content {
   display: flex;
   flex-direction: column;
-  gap: 34px;
+  gap: 10px;
 
   justify-content: space-between;
 }
@@ -358,7 +358,7 @@ img {
   order: 2;
 
   margin-top: auto;
-  padding-top: 32px;
+  padding-top: 6px;
 }
 
 .hero-copy h1 {
@@ -460,7 +460,7 @@ img {
   position: relative;
   width: 100%;
 
-  min-height: 270px;
+  min-height: 236px;
 }
 
 .hero-mac {
@@ -479,7 +479,7 @@ img {
   width: min(25%, 8rem);
 
   right: 68%;
-  bottom: 22%;
+  bottom: 4%;
 }
 
 /* ########### HOW IT WORKS ########### */
@@ -819,7 +819,7 @@ img {
   aspect-ratio: 9 / 19.5;
   overflow: hidden;
   border: none;
-  border-radius: 28px;
+  border-radius: 16px;
   background-color: rgba(226, 230, 234, 0.56);
 }
 
@@ -1482,10 +1482,11 @@ img {
     position: relative;
     top: auto;
     min-height: auto;
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, min(68vw, 20rem)) minmax(3.9rem, 4.6rem);
     grid-template-rows: auto auto auto;
-    gap: 14px 12px;
+    gap: 14px 10px;
     align-items: center;
+    justify-content: center;
   }
 
   .workflow-heading {
@@ -1496,8 +1497,8 @@ img {
   .workflow-mac-device {
     grid-column: 1;
     grid-row: 2;
-    justify-self: end;
-    width: min(64vw, 20rem);
+    justify-self: center;
+    width: min(68vw, 20rem);
   }
 
   .workflow-screen {
@@ -1509,7 +1510,7 @@ img {
   .workflow-phone-device {
     grid-column: 2;
     grid-row: 2;
-    justify-self: start;
+    justify-self: center;
     width: auto;
   }
 
@@ -1521,8 +1522,8 @@ img {
   .workflow-progress {
     grid-column: 1 / -1;
     grid-row: 3;
-    width: min(100%, 15rem);
-    justify-self: end;
+    width: 100%;
+    justify-self: stretch;
   }
 
   .workflow-heading h2 {
@@ -1535,5 +1536,63 @@ img {
 
   .workflow-steps {
     display: none;
+  }
+}
+
+@media (max-width: 414px) {
+  .hero-iphone {
+    bottom: 8%;
+  }
+}
+
+@media (min-width: 438px) and (max-width: 767px) {
+  .hero-iphone {
+    bottom: 2%;
+  }
+}
+
+@media (max-width: 380px) and (max-height: 720px) {
+  .hero {
+    padding-block: 28px 34px;
+  }
+
+  .hero-content {
+    gap: 6px;
+  }
+
+  .hero-visual {
+    min-height: 208px;
+  }
+
+  .hero-iphone {
+    bottom: 8%;
+  }
+
+  .hero-copy {
+    gap: 8px;
+    padding-top: 0;
+  }
+
+  .hero-copy h1 {
+    font-size: 36px;
+    line-height: 1.04;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+  }
+
+  .hero-description {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .hero-waitlist {
+    gap: 10px;
+  }
+
+  .hero-waitlist input,
+  .hero-waitlist button {
+    height: 44px;
   }
 }
