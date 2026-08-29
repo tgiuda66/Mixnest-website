@@ -393,12 +393,14 @@ const setWaitlistStatus = (form, message, type = '') => {
   status.dataset.status = type
 }
 
+const normalizeSupabaseUrl = (url) => url.replace(/\/+$/, '').replace(/\/rest\/v1$/i, '')
+
 const joinWaitlist = async (email) => {
   if (!supabaseUrl || !supabasePublishableKey) {
     throw new Error('Waitlist is not connected yet.')
   }
 
-  const response = await fetch(`${supabaseUrl.replace(/\/$/, '')}/rest/v1/rpc/join_waitlist`, {
+  const response = await fetch(`${normalizeSupabaseUrl(supabaseUrl)}/rest/v1/rpc/join_waitlist`, {
     method: 'POST',
     headers: {
       apikey: supabasePublishableKey,
