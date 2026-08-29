@@ -24,6 +24,9 @@ import {
   UserRound
 } from 'lucide'
 
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+const supabasePublishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
+
 document.querySelector('#app').innerHTML = `
 
   <header class="site-header">
@@ -79,10 +82,11 @@ document.querySelector('#app').innerHTML = `
             for feedback, revisions and final delivery. 
           </p>
 
-          <form class="hero-waitlist">
+          <form class="hero-waitlist" data-waitlist-form>
             <input type="email" placeholder="Enter your email" aria-label="Email address" />
 
             <button type="submit">Join the waitlist</button>
+            <p class="waitlist-status" role="status" aria-live="polite"></p>
           </form>
 
         </div>
@@ -183,9 +187,10 @@ document.querySelector('#app').innerHTML = `
             <h3>Join the waitlist before MixNest opens up.</h3>
           </div>
 
-          <form class="section-waitlist">
+          <form class="section-waitlist" data-waitlist-form>
             <input type="email" placeholder="Enter your email" aria-label="Email address for waitlist" />
             <button type="submit">Join the waitlist</button>
+            <p class="waitlist-status" role="status" aria-live="polite"></p>
           </form>
         </div>
       </div>
@@ -382,15 +387,63 @@ profileButton?.addEventListener('click', () => {
   profileLinks?.classList.toggle('open')
 })
 
-document.querySelectorAll('.hero-waitlist, .section-waitlist').forEach((form) => {
-  form.addEventListener('submit', (event) => {
+const setWaitlistStatus = (form, message, type = '') => {
+  const status = form.querySelector('.waitlist-status')
+  status.textContent = message
+  status.dataset.status = type
+}
+
+const joinWaitlist = async (email) => {
+  if (!supabaseUrl || !supabasePublishableKey) {
+    throw new Error('Waitlist is not connected yet.')
+  }
+
+  const response = await fetch(`${supabaseUrl.replace(/\/$/, '')}/rest/v1/rpc/join_waitlist`, {
+    method: 'POST',
+    headers: {
+      apikey: supabasePublishableKey,
+      Authorization: `Bearer ${supabasePublishableKey}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      signup_email: email,
+      signup_source: 'landing_page'
+    })
+  })
+
+  if (!response.ok) {
+    const payload = await response.json().catch(() => ({}))
+    throw new Error(payload.message || 'Could not join the waitlist.')
+  }
+}
+
+document.querySelectorAll('[data-waitlist-form]').forEach((form) => {
+  form.addEventListener('submit', async (event) => {
     event.preventDefault()
 
     const input = form.querySelector('input[type="email"]')
+    const button = form.querySelector('button[type="submit"]')
+    const email = input.value.trim().toLowerCase()
 
-    if (input.value.trim()) {
+    if (!email) {
+      setWaitlistStatus(form, 'Enter your email first.', 'error')
+      return
+    }
+
+    button.disabled = true
+    button.textContent = 'Joining...'
+    setWaitlistStatus(form, '', '')
+
+    try {
+      await joinWaitlist(email)
       input.value = ''
       input.placeholder = 'You are on the list'
+      setWaitlistStatus(form, 'You are on the list. We will email you when beta access opens.', 'success')
+    } catch (error) {
+      setWaitlistStatus(form, error.message || 'Could not join the waitlist.', 'error')
+    } finally {
+      button.disabled = false
+      button.textContent = 'Join the waitlist'
     }
   })
 })

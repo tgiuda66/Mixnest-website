@@ -449,8 +449,35 @@ img {
   background-color: #6bbbf3;
 }
 
+.hero-waitlist button:disabled,
+.section-waitlist button:disabled {
+  cursor: progress;
+  opacity: 0.7;
+}
+
 .hero-waitlist button:active {
   transform: scale(0.98);
+}
+
+.waitlist-status {
+  min-height: 18px;
+  margin: 0;
+  color: #8b96a3;
+  font-size: 12px;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.waitlist-status:empty {
+  visibility: hidden;
+}
+
+.waitlist-status[data-status="success"] {
+  color: #9fe5c0;
+}
+
+.waitlist-status[data-status="error"] {
+  color: #ffaaa3;
 }
 
 
