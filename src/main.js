@@ -467,14 +467,28 @@ const getWorkflowInView = () => {
   return rect.top < window.innerHeight * 0.78 && rect.bottom > window.innerHeight * 0.22
 }
 
+const activateWorkflowEntryStep = () => {
+  if (!workflowSteps.length) {
+    return
+  }
+
+  setWorkflowStep(workflowScrollDirection === 'up' ? workflowSteps.length - 1 : 0, { force: true })
+}
+
 window.addEventListener('scroll', () => {
   const currentScrollY = window.scrollY
   workflowScrollDirection = currentScrollY >= lastScrollY ? 'down' : 'up'
   lastScrollY = currentScrollY
+  const wasInView = isWorkflowInView
   isWorkflowInView = getWorkflowInView()
 
   if (!isWorkflowInView) {
     pauseWorkflowVideos()
+    return
+  }
+
+  if (!wasInView && workflowSteps.length) {
+    activateWorkflowEntryStep()
   }
 }, { passive: true })
 
@@ -621,7 +635,7 @@ if (workflowSteps.length) {
       }
 
       if (!wasInView) {
-        setWorkflowStep(workflowScrollDirection === 'up' ? workflowSteps.length - 1 : 0, { force: true })
+        activateWorkflowEntryStep()
       }
     }, {
       threshold: 0.22
