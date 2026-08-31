@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Support - MixNest</title>
+    <link rel="icon" type="image/svg+xml" href="/mixnest-favicon.svg" />
+    <link rel="alternate icon" type="image/png" href="/icon.png" />
+    <style>
+      :root { color-scheme: dark; --bg: #080d13; --panel: #111820; --line: #263444; --ink: #f6f8fb; --muted: #9da8b6; --blue: #58b6f6; }
+      * { box-sizing: border-box; }
+      body { margin: 0; min-height: 100vh; color: var(--ink); background: radial-gradient(circle at 58% 0%, rgba(38, 133, 206, .34), transparent 33rem), var(--bg); font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+      main { width: min(58rem, calc(100% - 2rem)); margin: 0 auto; padding: clamp(2rem, 7vw, 5rem) 0; }
+      .topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: clamp(3rem, 7vw, 5rem); }
+      .brand, .back, a { color: inherit; text-decoration: none; }
+      .brand { display: inline-flex; align-items: center; gap: .7rem; font-weight: 800; }
+      .brand img { width: 2.2rem; height: 2.2rem; }
+      .back { color: #9ed3fb; font-weight: 750; }
+      .back:hover, a:hover { color: #d6ecff; }
+      .eyebrow { margin: 0 0 .75rem; color: var(--blue); font-size: .8rem; font-weight: 850; letter-spacing: .13em; text-transform: uppercase; }
+      h1 { max-width: 10ch; margin: 0 0 1rem; font-size: clamp(3rem, 9vw, 6.2rem); line-height: .95; letter-spacing: 0; }
+      .intro { max-width: 42rem; margin: 0 0 2rem; color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.3rem); line-height: 1.55; }
+      .card { display: grid; gap: 1rem; max-width: 42rem; padding: clamp(1rem, 3vw, 1.35rem); border: 1px solid rgba(88, 182, 246, .22); border-radius: 1rem; background: rgba(17, 24, 32, .84); }
+      .card p { margin: 0; color: var(--muted); line-height: 1.55; }
+      .mail { display: inline-flex; align-items: center; justify-content: center; width: fit-content; min-height: 3.1rem; padding: 0 1.2rem; border-radius: .85rem; color: #061019; background: #58b6f6; font-weight: 850; }
+      .mail:hover { color: #061019; background: #8ed0ff; }
+      .topics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .85rem; margin-top: 1rem; }
+      .topic { padding: 1rem; border: 1px solid rgba(255,255,255,.08); border-radius: .85rem; background: rgba(17, 24, 32, .62); }
+      .topic strong, .topic span { display: block; }
+      .topic span { margin-top: .35rem; color: var(--muted); line-height: 1.45; }
+      .links { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; color: #9ed3fb; font-weight: 720; }
+      @media (max-width: 760px) { main { padding-top: 3rem; } .topbar { margin-bottom: 2.3rem; } h1 { font-size: clamp(2.6rem, 15vw, 4rem); } .mail { width: 100%; } .topics { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="topbar">
+        <a class="brand" href="/"><img src="/brand_mixnest.png" alt="" /><span>MixNest</span></a>
+        <a class="back" href="/">‹ Back</a>
+      </div>
+      <p class="eyebrow">Support</p>
+      <h1>How can we help?</h1>
+      <p class="intro">For account access, delivery links, uploads, upcoming billing questions, or anything that feels off in your workspace, reach out to MixNest support.</p>
+      <section class="card">
+        <strong>Email support</strong>
+        <p>We currently handle support by email.</p>
+        <a class="mail" href="mailto:support@mymixnest.com">support@mymixnest.com</a>
+      </section>
+      <section class="topics" aria-label="Support topics">
+        <div class="topic"><strong>Account access</strong><span>Login, registration, artist pairing, PIN and trusted devices.</span></div>
+        <div class="topic"><strong>Projects and files</strong><span>Uploads, download links, archived projects and missing files.</span></div>
+        <div class="topic"><strong>Plans and billing</strong><span>Subscriptions are prepared for later. Billing questions can already go through support.</span></div>
+      </section>
+      <nav class="links" aria-label="Legal and contact links">
+        <a href="contact.html">Contact us</a>
+        <a href="https://app.mymixnest.com/privacy.html">Privacy Policy</a>
+        <a href="https://app.mymixnest.com/terms.html">Terms</a>
+      </nav>
+    </main>
+  </body>
+</html>

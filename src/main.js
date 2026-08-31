@@ -333,9 +333,10 @@ document.querySelector('#app').innerHTML = `
 
           <div>
             <h4>Company</h4>
-            <a href="#">Contact</a>
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
+            <a href="contact.html">Contact us</a>
+            <a href="support.html">Support</a>
+            <a href="https://app.mymixnest.com/privacy.html">Privacy Policy</a>
+            <a href="https://app.mymixnest.com/terms.html">Terms</a>
           </div>
         </div>
       </div>
