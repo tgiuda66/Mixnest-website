@@ -326,8 +326,6 @@ document.querySelector('#app').innerHTML = `
 
           <div>
             <h4>Access</h4>
-            <a href="https://app.mymixnest.com/">Log in</a>
-            <a href="https://app.mymixnest.com/">Sign up</a>
             <a href="#waitlist">Waiting list</a>
           </div>
 
