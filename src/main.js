@@ -147,7 +147,7 @@ document.querySelector('#app').innerHTML = `
 
         <div class="how-showcase">
           <div class="showcase-copy">
-            <p class="section-eyebrow">Built for both sides</p>
+            <p class="section-eyebrow showcase-eyebrow">Built for both sides</p>
             <h3>Feedback stays connected to the audio.</h3>
             <p>
               The Mac workspace gives engineers a clean view of revisions and open

@@ -542,6 +542,10 @@ img {
   text-transform: uppercase;
 }
 
+.showcase-eyebrow {
+  color: #58b2f3;
+}
+
 .how-copy h2,
 .showcase-copy h3,
 .how-cta h3 {
